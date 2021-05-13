@@ -15,9 +15,13 @@ const TransactionSchema = new Schema({
     },
     notes: {
         type: String
+    },
+    envelopes: {
+            type: Schema.Types.ObjectId,
+            ref: "Envelope"
     }
 })
 
-const transaction = model("Transaction", TransactionSchema);
+const Transaction = model("Transaction", TransactionSchema);
 
-module.exports = transaction
+module.exports = Transaction
