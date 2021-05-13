@@ -8,11 +8,14 @@ const EnvelopeSchema = new Schema({
     total: {
         type: Number,
     },
-    transactionId: {
-        type: Number
-    }
+    transactions: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Transaction"
+        }
+    ],
 })
 
-const envelope = model("Envelope", EnvelopeSchema)
+const Envelope = model("Envelope", EnvelopeSchema)
 
-module.exports = envelope
+module.exports = Envelope
