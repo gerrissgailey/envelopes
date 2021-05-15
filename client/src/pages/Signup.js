@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import api from "../utils/API";
+
 
 function Signup() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (!email || !password) {
+      alert("Please fill out both fields.");
+      return;
+    }
+    api.signUpUser(email, password)
+    setEmail("");
+    setPassword("");
+  }
+
   return (
     <div className="container">
       <nav className="navbar navbar-default">
@@ -16,20 +33,20 @@ function Signup() {
             <form className="signup">
               <div className="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="email-input" placeholder="Email" />
+                <input type="email" className="form-control" id="email-input" placeholder="Email" onChange={e => setEmail(e.target.value)}/>
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="password-input" placeholder="Password" />
+                <input type="password" className="form-control" id="password-input" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
               </div>
               {/* <div style={{display: none}} id="alert" className="alert alert-danger" role="alert">
                 <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 <span className="sr-only">Error:</span> <span className="msg"></span>
               </div> */}
-              <button type="submit" className="btn btn-primary">Sign Up</button>
+              <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Sign Up</button>
             </form>
             <br />
-            <p>Or log in <a href="/login">here</a></p>
+            <p>Or log in <Link to="/login">here</Link></p>
           </div>
         </div>
       </div>
