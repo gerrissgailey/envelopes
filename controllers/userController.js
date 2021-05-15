@@ -2,7 +2,7 @@ const db = require("../models")
 
 module.exports = {
     login: function(req,res) {
-        res.status(200).json(true)
+        res.status(200).json(req.user)
        
     },
     create: function(req,res) {
