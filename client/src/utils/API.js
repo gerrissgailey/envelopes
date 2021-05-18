@@ -7,6 +7,6 @@ export default {
         .catch(error => console.log(error))
     },
     login: (email, password) => {
-        axios.post("/api/users/login", {email, password})
+        return axios.post("/api/users/login", {email, password})
     }
 }

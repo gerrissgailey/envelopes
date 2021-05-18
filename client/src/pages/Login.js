@@ -23,6 +23,8 @@ function Login() {
     setRedirect("/");
   }
 
+  useEffect(() => console.log(user), [user]);
+
   return redirect ? <Redirect to={redirect} />: (
     <div className="container">
       <nav className="navbar navbar-default">
