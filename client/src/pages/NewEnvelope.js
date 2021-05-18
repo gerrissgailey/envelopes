@@ -1,7 +1,12 @@
 import React from "react"
+import { useRecoilState } from "recoil";
+import { userState } from "../utils/UserAtom";
+import { Link, Redirect } from "react-router-dom";
 
 function NewEnvelope() {
-    return (
+    const [user, setUser] = useRecoilState(userState)
+    // console.log(user)
+    return !user ? <Redirect to="/login"/> : (
     <div>
         new envelope page
         {/* <form className="newEnvelope">
