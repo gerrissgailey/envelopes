@@ -14,6 +14,10 @@ const EnvelopeSchema = new Schema({
             ref: "Transaction"
         }
     ],
+    user: {
+        type: String,
+        required: true
+    },
 })
 
 const Envelope = model("Envelope", EnvelopeSchema)

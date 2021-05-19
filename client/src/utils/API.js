@@ -8,5 +8,11 @@ export default {
     },
     login: (email, password) => {
         return axios.post("/api/users/login", {email, password})
+    },
+    createEnvelope: (envelopeName, user) => {
+        axios.post("/api/envelopes/", {envelopeName, user})
+    },
+    getEnvelopes: () => {
+        return axios.get("/api/envelopes/")
     }
 }

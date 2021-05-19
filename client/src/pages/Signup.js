@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import api from "../utils/API";
+import { userState } from "../utils/UserAtom";
+import { useRecoilState } from "recoil";
 
 
 function Signup() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [redirect, setRedirect] = useState("")
+  const [user, setUser] = useRecoilState(userState)
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -14,11 +18,13 @@ function Signup() {
       return;
     }
     api.signUpUser(email, password)
+    .then(user => setUser(user.data))
     setEmail("");
     setPassword("");
+    setRedirect("/dashboard");
   }
 
-  return (
+  return redirect ? <Redirect to={redirect} />: (
     <div className="container">
       <nav className="navbar navbar-default">
         <div className="container-fluid">
