@@ -20,10 +20,10 @@ function Login() {
     .then(user => setUser(user.data))
     setEmail("");
     setPassword("");
-    setRedirect("/");
+    setRedirect("/dashboard");
   }
 
-  useEffect(() => console.log(user), [user]);
+  useEffect(() => console.log(user._id), [user]);
 
   return redirect ? <Redirect to={redirect} />: (
     <div className="container">
