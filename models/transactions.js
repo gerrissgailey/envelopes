@@ -16,7 +16,7 @@ const TransactionSchema = new Schema({
     notes: {
         type: String
     },
-    envelopes: {
+    envelope: {
             type: Schema.Types.ObjectId,
             ref: "Envelope"
     }

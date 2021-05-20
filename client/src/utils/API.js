@@ -12,7 +12,7 @@ export default {
     createEnvelope: (envelopeName, user) => {
         axios.post("/api/envelopes/", {envelopeName, user})
     },
-    getEnvelopes: () => {
-        return axios.get("/api/envelopes/")
+    getEnvelopes: (id) => {
+        return axios.get("/api/envelopes/" + id )
     }
 }

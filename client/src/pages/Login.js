@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [redirect, setRedirect] = useState("")
+  // const [redirect, setRedirect] = useState("")
   const [user, setUser] = useRecoilState(userState)
 
   function handleFormSubmit(event) {
@@ -20,12 +20,12 @@ function Login() {
     .then(user => setUser(user.data))
     setEmail("");
     setPassword("");
-    setRedirect("/dashboard");
+    // setRedirect("/dashboard");
   }
 
   useEffect(() => console.log(user._id), [user]);
 
-  return redirect ? <Redirect to={redirect} />: (
+  return user ? <Redirect to="/dashboard" />: (
     <div className="container">
       <nav className="navbar navbar-default">
         <div className="container-fluid">

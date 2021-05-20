@@ -13,20 +13,20 @@ function Dashboard() {
 
     
     useEffect(() => {
-        console.log(api.getEnvelopes())
-        api.getEnvelopes()
+        api.getEnvelopes(user._id)
         .then(res => setEnvelope(res.data))
+        // .then(res => console.log(res))
+        .catch (err => console.log(err))
         // .then(console.log(data))
     }, [])
     // console.log(user._id)
     return !user ? <Redirect to="/login"/> : (
     <>
-        {envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope.map((x) => {
+        {envelope && envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope && envelope.map((x) => {
             return(
                 <div className="container">
-                    {x}
+                    {JSON.stringify(x)}
                 </div>
-
             )
         })
         }
