@@ -14,5 +14,8 @@ export default {
     },
     getEnvelopes: (id) => {
         return axios.get("/api/envelopes/" + id )
+    },
+    getTransactions: (id) => {
+        return axios.get("/api/transactions/" + id )
     }
 }

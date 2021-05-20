@@ -7,6 +7,7 @@ import Wrapper from "./components/Wrapper";
 import { RecoilRoot } from "recoil";
 import Navbar from "./components/Navbar/Navbar";
 import NewEnvelope from "./pages/NewEnvelope"
+import EnvelopeTransactions from "./pages/EnvelopeTransactions"
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/new-envelope" component={NewEnvelope} />
+            <Route path="/envelope/:id" component={EnvelopeTransactions} />
           </Wrapper>
         </div>
       </Router>

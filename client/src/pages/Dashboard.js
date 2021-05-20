@@ -22,13 +22,13 @@ function Dashboard() {
     // console.log(user._id)
     return !user ? <Redirect to="/login"/> : (
     <>
-        {envelope && envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope && envelope.map((x) => {
-            return(
+        {envelope && envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope && envelope.map(envelope =>
+            <Link to={`/envelope/${envelope._id}`}>
                 <div className="container">
-                    {JSON.stringify(x)}
+                    {JSON.stringify(envelope)}
                 </div>
-            )
-        })
+            </Link>
+        )
         }
     </>
     ) 
