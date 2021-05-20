@@ -15,8 +15,9 @@ const EnvelopeSchema = new Schema({
         }
     ],
     user: {
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        require: true
     },
 })
 

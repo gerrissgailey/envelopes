@@ -15,6 +15,7 @@ function NewEnvelope() {
           alert("Please add a name for your envelope.");
           return;
         }
+        console.log(envelope)
         api.createEnvelope(envelope, user._id)
         setEnvelope("");
         setRedirect("/dashboard");
