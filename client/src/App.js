@@ -5,8 +5,9 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import { RecoilRoot } from "recoil";
 import Navbar from "./components/Navbar/Navbar";
-import NewEnvelope from "./pages/NewEnvelope"
-import EnvelopeTransactions from "./pages/EnvelopeTransactions"
+import NewEnvelope from "./pages/NewEnvelope";
+import EnvelopeTransactions from "./pages/EnvelopeTransactions";
+import NewDeposit from "./pages/NewDeposit";
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/new-envelope" component={NewEnvelope} />
             <Route path="/envelope/:id" component={EnvelopeTransactions} />
+            <Route path="/deposit" component={NewDeposit} />
         </div>
       </Router>
     </RecoilRoot>
