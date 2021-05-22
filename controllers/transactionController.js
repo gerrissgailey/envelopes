@@ -16,9 +16,25 @@ module.exports = {
         // .then(x => console.log(x))
         .catch(err => res.status(422).json(err))
     },
+    // create: function(req,res) {
+    //     db.Transaction.create(req.body)
+    //     .then(dbTransaction => res.json(dbTransaction))
+    //     .catch(err => res.status(422).json(err))
+    // },
     create: function(req,res) {
         db.Transaction.create(req.body)
-        .then(dbTransaction => res.json(dbTransaction))
+        .then(transaction => {
+            console.log(req.body.envelope)
+            db.Envelope.findById( req.body.envelope )
+            .then( envelope => {
+                envelope.transactions.push(transaction._id)
+                console.log(envelope)
+                envelope.save()
+                .catch(e => console.log(e))
+            } )
+            return transaction
+        })
+        .then(x => res.json(x))
         .catch(err => res.status(422).json(err))
     },
     remove: function(req,res) {

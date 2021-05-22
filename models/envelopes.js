@@ -7,6 +7,7 @@ const EnvelopeSchema = new Schema({
     },
     total: {
         type: Number,
+        default: 0
     },
     transactions: [
         {

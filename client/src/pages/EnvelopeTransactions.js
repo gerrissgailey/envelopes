@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import api from "../utils/API";
+import TransactionForm from "../components/TransactionForm";
 
 const EnvelopeTransactions = () => {
   const { id } = useParams();
@@ -11,12 +12,14 @@ const EnvelopeTransactions = () => {
   }, []);
 
   return (
-    transactions.length > 0 && transactions.map(transaction =>
-      <div className="row">
-        <p>{transaction.name}</p>
-        <p>{transaction.amount}</p>
-      </div>)
-  )
+    <>
+      <TransactionForm />
+      {transactions.length > 0 && transactions.map(transaction =>
+        <div className="row">
+          <p>{transaction.payee}</p>
+        </div>)}
+    </>
+  );
 };
 
 export default EnvelopeTransactions;

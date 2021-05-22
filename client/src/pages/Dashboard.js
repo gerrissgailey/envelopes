@@ -24,8 +24,12 @@ function Dashboard() {
     <>
         {envelope && envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope && envelope.map(envelope =>
             <Link to={`/envelope/${envelope._id}`}>
-                <div className="container">
-                    {JSON.stringify(envelope)}
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <Envelope
+                        name={envelope.envelopeName}
+                        total={envelope.total}
+                    />
+                    {/* {JSON.stringify(envelope)} */}
                 </div>
             </Link>
         )
