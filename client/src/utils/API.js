@@ -15,6 +15,9 @@ export default {
     getEnvelopes: (id) => {
         return axios.get("/api/envelopes/" + id )
     },
+    createTransaction: (transaction, envelope) => {
+        axios.post("/api/transactions/", {transaction, envelope})
+    },
     getTransactions: (id) => {
         return axios.get("/api/transactions/" + id )
     }
