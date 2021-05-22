@@ -7,10 +7,11 @@ const TransactionSchema = new Schema({
     },
     date: {
         type: Date,
-        required: true
+        // required: true
     },
     amount: {
         type: Number,
+        default: 0,
         required: true
     },
     notes: {
