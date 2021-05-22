@@ -18,6 +18,9 @@ export default {
     createTransaction: (payee, date, amount, notes, envelopeId) => {
         return axios.post("/api/transactions/", {payee, date, amount, notes, envelopeId})
     },
+    deposit: (payee, date, notes, deposits) => {
+        return axios.post("/api/transactions/deposits", {payee, date, notes, deposits})
+    },
     getTransactions: (id) => {
         return axios.get("/api/transactions/" + id )
     }

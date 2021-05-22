@@ -13,5 +13,8 @@ router
   // .get(transactionController.findById)
   // .put(transactionController.update)
   .delete(transactionController.remove);
+  
+router.route("/deposits")
+  .post(transactionController.deposit);
 
 module.exports = router;

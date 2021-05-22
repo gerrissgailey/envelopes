@@ -32,6 +32,11 @@ function Navbar() {
               Add a New Envelope
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/deposit" className= "nav-link active">
+              Add a Deposit
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
