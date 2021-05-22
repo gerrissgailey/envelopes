@@ -4,20 +4,28 @@ import api from "../utils/API";
 import { userState } from "../utils/UserAtom";
 import { useRecoilState } from "recoil";
 
-function TransactionForm() {
+function TransactionForm(props) {
     const [user, setUser] = useRecoilState(userState)
-    const [transaction, setTransaction] = useState("")
+    const [payee, setPayee] = useState("")
+    const [date, setDate] = useState("")
+    const [amount, setAmount] = useState("")
+    const [notes, setNotes] = useState("")
+    // const [envelope, setEnvelope] = useState("")
     const [redirect, setRedirect] = useState("")
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        // if (!transaction) {
-        //   alert("Please enter a payee for your transaction.");
-        //   return;
-        // }
-        console.log(transaction)
-        api.createTransaction(transaction, user._id)
-        setTransaction("");
+        if (amount.startsWith("-")) {
+            setAmount(amount.substring(1))
+        }
+        // console.log(transaction)
+        api.createTransaction(payee, date, amount, notes, props.envelopeId)
+        .then(res => props.update(prevState => [...prevState, res.data]))
+        setPayee("");
+        setDate("");
+        setAmount("");
+        setNotes("");
+        // setEnvelope("");
         // setRedirect("/dashboard");
       }
     // console.log(user)
@@ -27,7 +35,19 @@ function TransactionForm() {
         <form className="newTransaction">
             <div className="form-group">
                 <label htmlFor="payee">Payee</label>
-                <input type="text" className="form-control" id="payee" placeholder="Payee" onChange={e => setTransaction(e.target.value)}/>
+                <input type="text" className="form-control" id="payee" placeholder="Payee" onChange={e => setPayee(e.target.value)}/>
+            </div>
+            <div className="form-group">
+                <label htmlFor="date">Date</label>
+                <input type="text" className="form-control" id="date" placeholder="date" onChange={e => setDate(e.target.value)}/>
+            </div>
+            <div className="form-group">
+                <label htmlFor="amount">Amount</label>
+                <input type="text" className="form-control" id="amount" placeholder="amount" onChange={e => setAmount(e.target.value)}/>
+            </div>
+            <div className="form-group">
+                <label htmlFor="notes">Notes</label>
+                <input type="text" className="form-control" id="notes" placeholder="notes" onChange={e => setNotes(e.target.value)}/>
             </div>
             <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Submit</button>
         </form>
