@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DepositAllocation from "../components/DepositAllocation"
+// import DepositAllocation from "../components/DepositAllocation"
 import { Link, Redirect } from "react-router-dom";
 import api from "../utils/API";
 import { useRecoilState } from "recoil";
@@ -29,14 +29,23 @@ function Deposit() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        if (amount.startsWith("-")) {
-            setAmount(amount.substring(1))
+        const total = (Object.values(envelopeInput)).map(x => parseInt(x.value))
+        var newTotal = total.reduce(redFunc);
+
+        function redFunc(total, num) {
+            return total + num;
         }
-        api.deposit(payee, date, notes, Object.values(envelopeInput))
-        setPayee("");
-        setDate("");
-        setAmount("");
-        setNotes("");
+            
+        if (newTotal === parseInt(amount)) {
+            api.deposit(payee, date, notes, Object.values(envelopeInput))
+            setPayee("");
+            setDate("");
+            setAmount("");
+            setNotes("");
+            
+        } else {
+            alert ("Your allocations don't add up to your deposit amount entered. Please check your math!!!")
+        }
     }
 
     return !user ? <Redirect to="/login" /> : (
