@@ -10,27 +10,24 @@ const EnvelopeTransactions = () => {
   const [transactions, setTransactions] = useState([]);
   // const [update, setUpdate] = useState([]);
 
-  // ============================added 5-22-21
-  const [theChart, setTheChart] = useState([])
-  let dataToBeUsed = [1000,888,885,831,801,800,625,1010,667]
-  let dataToBeUsed2 = [1,2,3,4,5,6,7,8,9]
-  const chart = {
-      labels: dataToBeUsed2,
-      datasets: [
-        {
-          label: 'Balance',
-          fill: false,
-          lineTension: .75,
-          backgroundColor: 'rgba(85,51,230,1)',
-          borderColor: 'rgba(85,51,230,1)',
-          borderWidth: 2,
-          data: dataToBeUsed
-        }
-      ]
-  }
+  // const [theChart, setTheChart] = useState([])
+  // let dataToBeUsed = [1000,888,885,831,801,800,625,1010,667]
+  // let dataToBeUsed2 = [1,2,3,4,5,6,7,8,9]
+  // const chart = {
+  //     labels: dataToBeUsed2,
+  //     datasets: [
+  //       {
+  //         label: 'Balance',
+  //         fill: false,
+  //         lineTension: .75,
+  //         backgroundColor: 'rgba(85,51,230,1)',
+  //         borderColor: 'rgba(85,51,230,1)',
+  //         borderWidth: 2,
+  //         data: dataToBeUsed
+  //       }
+  //     ]
+  // }
 
-
-  // ============================end of added 5-22-21
 
 
   useEffect(() => {
@@ -47,8 +44,7 @@ const EnvelopeTransactions = () => {
           <p>{transaction.payee}</p>
         </div>)}
 
-        {/* ========================================================Added 5-22-21 */}
-        <div style={{height: "400px", width: "600px"}}>
+        {/* <div style={{height: "400px", width: "600px"}}>
           <Line
             data={chart}
             options={{
@@ -64,9 +60,7 @@ const EnvelopeTransactions = () => {
               responseive: true
             }}
           />
-        </div>
-
-        {/* -===================================================end of added 5-22-21 */}
+        </div> */}
     </>
   );
 };

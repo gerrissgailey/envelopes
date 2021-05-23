@@ -13,9 +13,8 @@ function Dashboard() {
 
     
 
-    // added by jordon 5-22-21
-    let chartValues = [6,8,9,2,5]
-    let chartLabels = [1,2,3,4,5]
+    let [chartValues, setChartValues] = useState([])
+    let [chartLabels, setChartLabels] = useState([])
     const pieChart = {
         labels: chartLabels,
         datasets: [
@@ -43,18 +42,27 @@ function Dashboard() {
       }
 
 
-
-
-
-    // end of jordon
-
-
-
-
-
     useEffect(() => {
         api.getEnvelopes(user._id)
         .then(res => setEnvelope(res.data))
+        .catch (err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        api.getEnvelopes(user._id)
+        .then(res => setChartLabels(
+            res.data.map(x => x.envelopeName)
+        ))
+        .catch (err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        api.getEnvelopes(user._id)
+        .then(res => setChartValues(
+            res.data.map(x => x.total)
+        ))
+
+
         .catch (err => console.log(err))
     }, [])
 
@@ -74,7 +82,6 @@ function Dashboard() {
         )
         }
 
-        {/* =========================data added by Jordon 5-22-21 */}
         <div style={{height: "250px", width: "350px"}}>
 
         <Pie
@@ -82,7 +89,7 @@ function Dashboard() {
           options={{
               title:{
                   display:true,
-                  text:'Average Rainfall per month',
+                  text:'',
                   fontSize:20
                 },
                 legend:{
@@ -93,9 +100,6 @@ function Dashboard() {
             }}
             />
             </div>
-
-
-        {/* ========================= end */}
     </>
     ) 
 }
