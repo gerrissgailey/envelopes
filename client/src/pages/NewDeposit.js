@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DepositAllocation from "../components/DepositAllocation"
+// import DepositAllocation from "../components/DepositAllocation"
 import { Link, Redirect } from "react-router-dom";
 import api from "../utils/API";
 import { useRecoilState } from "recoil";
@@ -40,46 +40,55 @@ function Deposit() {
     }
 
     return !user ? <Redirect to="/login" /> : (
-        <>
-            <div>
-                <h1>Enter New Deposit:</h1>
-                <form className="newTransaction">
-                    <div className="form-group">
-                        <label htmlFor="payee">Payer</label>
-                        <input type="text" className="form-control" id="payee" placeholder="Payer" onChange={e => setPayee(e.target.value)} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="date">Date</label>
-                        <input type="text" className="form-control" id="date" placeholder="date" onChange={e => setDate(e.target.value)} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="amount">Deposit Amount</label>
-                        <input type="text" className="form-control" id="amount" placeholder="amount" onChange={e => setAmount(e.target.value)} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="notes">Notes</label>
-                        <input type="text" className="form-control" id="notes" placeholder="notes" onChange={e => setNotes(e.target.value)} />
-                    </div>
-                    <table>
-                        {envelope && envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope.length > 0 && envelope.map(envelope =>
-                            <tr>
-                                <td>
-                                    {envelope.envelopeName}
-                                </td>
-                                <td>
-                                    ${envelope.total}
-                                </td>
-                                <td>
-                                    $<input name={envelope.envelopeName} type="number" placeholder="0.00" onChange={(e) => setEnvelopeInput(({...envelopeInput, [e.target.name]: {value: e.target.value, id: envelope._id}}))} />
-                                </td>
-                            </tr>
-                        )
-                        }
-                    </table>
-                    <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Submit</button>
-                </form>
+            <div className="row">
+                <div className="col-md-10 offset-md-1">
+                    <h1>Enter a Deposit</h1>
+                    <form className="newDeposit">
+                        <div className="mb-3">
+                            <label htmlFor="payee">Payer</label>
+                            <input type="text" className="form-control" id="payee" placeholder="Payer" onChange={e => setPayee(e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="date">Date</label>
+                            <input type="date" className="form-control" id="date" placeholder="Date" onChange={e => setDate(e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="amount">Deposit Amount</label>
+                            <input type="number" className="form-control" id="amount" placeholder="Amount" onChange={e => setAmount(e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="notes">Notes</label>
+                            <input type="text" className="form-control" id="notes" placeholder="Notes" onChange={e => setNotes(e.target.value)} />
+                        </div>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Envelope</th>
+                                    <th scope="col">Current Amount</th>
+                                    <th scope="col">Deposit Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {envelope && envelope.length === 0 ? <p>You don't have any envelopes</p> : envelope.length > 0 && envelope.map((envelope, i) =>
+                                    <tr key={i}>
+                                        <td>
+                                            {envelope.envelopeName}
+                                        </td>
+                                        <td>
+                                            ${envelope.total}
+                                        </td>
+                                        <td>
+                                            $<input name={envelope.envelopeName} type="number" placeholder="0.00" onChange={(e) => setEnvelopeInput(({...envelopeInput, [e.target.name]: {value: e.target.value, id: envelope._id}}))} />
+                                        </td>
+                                    </tr>
+                                )
+                                }
+                            </tbody>
+                        </table>
+                        <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Submit</button>
+                    </form>
+                </div>
             </div>
-        </>
     )
 }
 

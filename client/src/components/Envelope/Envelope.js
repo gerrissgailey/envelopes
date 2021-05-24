@@ -12,14 +12,12 @@ function Envelope(props) {
     const [envelope, setEnvelope] = useRecoilState(envelopeState)
     // api.getEnvelopes()
     return (
-        <div className="col">
-            <div class="card">
-                <img src="https://live.staticflickr.com/65535/51194437431_d0fd1a6ef1_o.png" class="card-img" alt="envelope" />
-                <div class="card-img-overlay z-index">
-                    <h5 class="card-title">{props.name}</h5>
-                    <p class="card-text">{props.total}</p>
-                </div>
+        <div className="card text-dark">
+            <img src="https://live.staticflickr.com/65535/51194437431_d0fd1a6ef1_o.png" className="card-img" alt="envelope" />
+            <div className="card-img-overlay">
+                <h1 className="card-text envelopeTotal">${props.total}</h1>
             </div>
+            <h5 className="card-footer text-center">{props.name}</h5>
         </div>
     )
 }
