@@ -13,7 +13,7 @@ function Envelope(props) {
     // api.getEnvelopes()
     return (
         <div className="card text-dark">
-            <img src="https://live.staticflickr.com/65535/51194437431_d0fd1a6ef1_o.png" className="card-img" alt="envelope" />
+            <img src="https://live.staticflickr.com/65535/51194437431_b2c9f783a7_z.jpg" className="card-img" alt="envelope" />
             <div className="card-img-overlay">
                 <h1 className="card-text envelopeTotal">${props.total}</h1>
             </div>
