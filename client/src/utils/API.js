@@ -10,10 +10,13 @@ export default {
         return axios.post("/api/users/login", {email, password})
     },
     createEnvelope: (envelopeName, user) => {
-        axios.post("/api/envelopes/", {envelopeName, user})
+        return axios.post("/api/envelopes/", {envelopeName, user})
     },
     getEnvelopes: (id) => {
         return axios.get("/api/envelopes/" + id )
+    },
+    getEnvelopeName: (envelopeId) => {
+        return axios.get("/api/envelopes/data/" + envelopeId )
     },
     createTransaction: (payee, date, amount, notes, envelopeId) => {
         return axios.post("/api/transactions/", {payee, date, amount, notes, envelopeId})

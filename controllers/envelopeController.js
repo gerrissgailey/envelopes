@@ -10,6 +10,14 @@ module.exports = {
         // .then(x => console.log(x))
         .catch(err => res.status(422).json(err))
     },
+    findOne: function(req,res) {
+        // console.log(req.user)
+        db.Envelope.findById( req.params.id ) 
+        // .populate("envelopes")
+        .then(x => res.json(x))
+        // .then(x => console.log(x))
+        .catch(err => res.status(422).json(err))
+    },
     create: function(req,res) {
         db.Envelope.create(req.body)
         .then(envelope => {

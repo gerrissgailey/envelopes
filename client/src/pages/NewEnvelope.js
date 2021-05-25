@@ -17,11 +17,13 @@ function NewEnvelope() {
         }
         console.log(envelope)
         api.createEnvelope(envelope, user._id)
-        setEnvelope("");
-        setRedirect("/dashboard");
+        .then(() => {
+            setEnvelope("");
+            setRedirect("/dashboard");
+        })
     }
     console.log(user)
-    return !user ? <Redirect to="/login" /> : (
+    return !user ? <Redirect to="/login" /> : redirect ? <Redirect to="/dashboard" /> : (
         <div className="row">
             <div className="col-md-6 offset-md-3">
                 <h1>Add a New Envelope</h1>

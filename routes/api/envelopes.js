@@ -13,4 +13,9 @@ router
   // .put(envelopeController.update)
   .delete(envelopeController.remove);
 
+router
+  .route("/data/:id")
+  .get(envelopeController.findOne)
+
+
 module.exports = router;

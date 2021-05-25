@@ -15,6 +15,7 @@ function Deposit() {
     const [amount, setAmount] = useState("")
     const [notes, setNotes] = useState("")
     const [envelopeInput, setEnvelopeInput] = useState({})
+    const [redirect, setRedirect] = useState("")
 
 
     useEffect(() => {
@@ -29,6 +30,9 @@ function Deposit() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
+        if (Object.values(envelopeInput).length < 1 ) {
+            return}
+        
         const total = (Object.values(envelopeInput)).map(x => parseInt(x.value))
         var newTotal = total.reduce(redFunc);
 
@@ -38,36 +42,39 @@ function Deposit() {
             
         if (newTotal === parseInt(amount)) {
             api.deposit(payee, date, notes, Object.values(envelopeInput))
-            setPayee("");
-            setDate("");
-            setAmount("");
-            setNotes("");
+            .then(() => {
+                setPayee("");
+                setDate("");
+                setAmount("");
+                setNotes("");
+                setRedirect("/dashboard");
+        })
             
         } else {
             alert ("Your allocations don't add up to your deposit amount entered. Please check your math!!!")
         }
     }
 
-    return !user ? <Redirect to="/login" /> : (
+    return !user ? <Redirect to="/login" /> : redirect ? <Redirect to="/dashboard" /> : (
             <div className="row">
                 <div className="col-md-10 offset-md-1">
                     <h1>Enter a Deposit</h1>
                     <form className="newDeposit">
                         <div className="mb-3">
                             <label htmlFor="payee">Payer</label>
-                            <input type="text" className="form-control" id="payee" placeholder="Payer" onChange={e => setPayee(e.target.value)} />
+                            <input type="text" className="form-control" id="payee" placeholder="Payer" value={payee} onChange={e => setPayee(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="date">Date</label>
-                            <input type="date" className="form-control" id="date" placeholder="Date" onChange={e => setDate(e.target.value)} />
+                            <input type="date" className="form-control" id="date" placeholder="Date" value={date} onChange={e => setDate(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="amount">Deposit Amount</label>
-                            <input type="number" className="form-control" id="amount" placeholder="Amount" onChange={e => setAmount(e.target.value)} />
+                            <input type="number" className="form-control" id="amount" placeholder="Amount" value={amount} onChange={e => setAmount(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="notes">Notes</label>
-                            <input type="text" className="form-control" id="notes" placeholder="Notes" onChange={e => setNotes(e.target.value)} />
+                            <input type="text" className="form-control" id="notes" placeholder="Notes" value={notes} onChange={e => setNotes(e.target.value)} />
                         </div>
                         <table className="table">
                             <thead>
@@ -87,7 +94,7 @@ function Deposit() {
                                             ${envelope.total}
                                         </td>
                                         <td>
-                                            $<input name={envelope.envelopeName} type="number" placeholder="0.00" onChange={(e) => setEnvelopeInput(({...envelopeInput, [e.target.name]: {value: e.target.value, id: envelope._id}}))} />
+                                            $<input name={envelope.envelopeName} type="number" value={envelopeInput[envelope.envelopeName.value]} placeholder="0.00" onChange={(e) => setEnvelopeInput(({...envelopeInput, [e.target.name]: {value: e.target.value, id: envelope._id}}))} />
                                         </td>
                                     </tr>
                                 )
