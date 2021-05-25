@@ -26,32 +26,22 @@ function Login() {
   useEffect(() => console.log(user._id), [user]);
 
   return user ? <Redirect to="/dashboard" />: (
-    <div className="container">
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
+    <div className="row">
+      <div className="col-md-6 offset-md-3">
+        <h2>Log In Form</h2>
+        <form className="login">
+          <div className="mb-3">
+            <label htmlFor="email-input">Email</label>
+            <input type="email" className="form-control" id="email-input" placeholder="Email" onChange={e => setEmail(e.target.value)}/>
           </div>
-        </div>
-      </nav>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3">
-            <h2>Login Form</h2>
-            <form className="login">
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="email-input" placeholder="Email" onChange={e => setEmail(e.target.value)}/>
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="password-input" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
-              </div>
-              <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Login</button>
-            </form>
-            <br />
-            <p>Or sign up <Link to="/signup">here</Link></p>
+          <div className="mb-3">
+            <label htmlFor="password-input">Password</label>
+            <input type="password" className="form-control" id="password-input" placeholder="Password" onChange={e => setPassword(e.target.value)}/>
           </div>
-        </div>
+          <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Log In</button>
+        </form>
+        <br />
+        <p>Or sign up <Link to="/signup">here</Link></p>
       </div>
     </div>
   );

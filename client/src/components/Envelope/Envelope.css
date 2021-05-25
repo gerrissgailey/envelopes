@@ -1,7 +1,21 @@
-.z-index {
-  z-index: 2;
-}
+/* .z-index {
+  z-index: 1;
+} */
 
 .card {
-  width: 400px;
+  width: 200px;
+}
+
+/* .card-body {
+  background-image: url(https://live.staticflickr.com/65535/51194437431_d0fd1a6ef1_o.png);
+  background-size: cover;
+} */
+
+.envelopeTotal {
+  padding-top: 50px;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
 }
