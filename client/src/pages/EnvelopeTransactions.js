@@ -8,6 +8,10 @@ import TransactionForm from "../components/TransactionForm";
 const EnvelopeTransactions = () => {
   const { id } = useParams();
   const [transactions, setTransactions] = useState([]);
+  const [envelopeName, setEnvelopeName] = useState([]);
+
+
+
   // const [update, setUpdate] = useState([]);
 
   // const [theChart, setTheChart] = useState([])
@@ -36,8 +40,21 @@ const EnvelopeTransactions = () => {
     })
   }, []);
 
+  useEffect(() => {
+    api.getEnvelopeName(id).then(res => {
+      setEnvelopeName(res.data)
+      // console.log(res.data)
+    })
+  }, []);
+
   return (
     <>
+    <div className="row">
+      <h3 className="bg-secondary text-light">
+        {envelopeName.envelopeName} : ${envelopeName.total} 
+      </h3>
+    </div>
+
       <TransactionForm envelopeId={id} update={setTransactions}/>
       <div className="row">
         <table className="table">

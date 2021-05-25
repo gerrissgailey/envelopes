@@ -1,8 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import { userState } from "../../utils/UserAtom";
+import { useRecoilState } from "recoil";
 
 function Navbar() {
+  const [user, setUser] = useRecoilState(userState)
+  function logOut() {
+    setUser("")
+  }
+
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-light">
       <div className="container-fluid">
@@ -38,6 +44,14 @@ function Navbar() {
               <NavLink to="/deposit" className="nav-link" activeClassName="active">
                 Add a Deposit
               </NavLink>
+            </li>
+            <li className="nav-item">
+              {/* <NavLink to="/login" className="nav-link" activeClassName="active">
+               */}
+               <button type="button" className="btn btn-secondary btn-sm" onClick={logOut}>
+                  Log Out
+               </button>
+              {/* </NavLink> */}
             </li>
           </ul>
         </div>
